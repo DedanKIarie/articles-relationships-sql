@@ -21,7 +21,7 @@ class Article:
     
     @classmethod
     def find_by_id(cls, id):
-        conn = get_connection
+        conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM articles WHERE id=?", (id,))
         row = cursor.fetchone()

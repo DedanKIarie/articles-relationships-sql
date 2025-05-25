@@ -19,7 +19,7 @@ class Magazine:
 
     @classmethod
     def find_by_id(cls, id):
-        conn = get_connection
+        conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM magazines WHERE id=?", (id,))
         row = cursor.fetchone()
@@ -37,7 +37,7 @@ class Magazine:
         from lib.models.article import Article
         return [Article(row['title'], row['author_id'], row['magazine_id'], row['id']) for row in rows]
 
-    def contributoes(self):
+    def contributors(self):
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("""
