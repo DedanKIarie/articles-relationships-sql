@@ -27,3 +27,24 @@ class Author:
             return cls(row['name'], row['id'])
         
         return None
+    def articles(self):
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM articles WHERE author_id=?", (self.id,))
+        rows = cursor.fetchall()
+        conn.close()
+        from lib.models.article import Article
+        return [Article(row['title'], row['author_id'], row['magazine_id'], row['id']) for row in rows]
+    
+    def magazines(self):
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT DISTINCT magazines.* FROM magazines
+            JOIN articles ON magazines.id = articles.magazine_id
+            WHERE articles.author_id = ?
+            """, (self.id,))
+        rows = cursor.fetchall()
+        conn.close()
+        from lib.models.magazine import Magazine
+        return [Magazine(row['name'], row['category'], row['id']) for row in rows]
