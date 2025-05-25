@@ -8,7 +8,7 @@ class Author:
         conn  = get_connection()
         cursor = conn.cursor()
         if self.id:
-            cursor.execute("UPDATE authors SET name=? Where id=?", (self.name, self.id))
+            cursor.execute("UPDATE authors SET name=? WHERE id=?", (self.name, self.id))
         else:
             cursor.execute("INSERT INTO authors (name) VALUES (?)", (self.name,))
             self.id = cursor.lastrowid
