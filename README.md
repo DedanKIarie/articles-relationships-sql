@@ -92,14 +92,6 @@ scripts/run_queries.py seeds the database and can be used to execute and test yo
 python scripts/run_queries.py
 ```
 
-### Interactive Debugging
-
-Use lib/debug.py to interact directly with models and the database via ipdb.
-
-```bash
-python lib/debug.py
-```
-
 Inside ipdb:
 
 ```python
